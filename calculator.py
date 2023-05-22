@@ -1,4 +1,7 @@
 from tkinter import *
+
+first_number=second_number=operator=None
+
 def get_num(num):
     current=resultLabel['text']
     new=current+str(num)
@@ -6,6 +9,23 @@ def get_num(num):
 
 def clear():
     resultLabel.config(text="")
+
+def get_operator(oprtr):
+    global first_number,operator
+    first_number=int(resultLabel["text"])
+    operator=oprtr
+    resultLabel.config(text="")
+def get_result():
+    global first_number,second_number,operator
+    second_number=int(resultLabel["text"])
+    if operator=="+":
+        resultLabel.config(text=int(first_number+second_number))
+    elif operator=="-":
+        resultLabel.config(text=int(first_number - second_number))
+    elif operator == "*":
+        resultLabel.config(text=int(first_number * second_number))
+    else:
+        resultLabel.config(text=int(first_number / second_number))
 
 window=Tk()
 window.title("CALCULATOR")
@@ -30,7 +50,7 @@ btn9=Button(window,text="9",bg="#355c58",fg="white",width=5,height=3,command=lam
 btn9.grid(row=1,column=2)
 btn9.config(font=("verdana",14))
 
-btnplus=Button(window,text="+",bg="#355c58",fg="white",width=5,height=3)
+btnplus=Button(window,text="+",bg="#355c58",fg="white",width=5,height=3,command=lambda :get_operator("+"))
 btnplus.grid(row=1,column=3)
 btnplus.config(font=("verdana",14))
 #
@@ -46,7 +66,7 @@ btn6=Button(window,text="6",bg="#355c58",fg="white",width=5,height=3,command=lam
 btn6.grid(row=2,column=2)
 btn6.config(font=("verdana",14))
 
-btnminus=Button(window,text="-",bg="#355c58",fg="white",width=5,height=3)
+btnminus=Button(window,text="-",bg="#355c58",fg="white",width=5,height=3,command=lambda :get_operator("-"))
 btnminus.grid(row=2,column=3)
 btnminus.config(font=("verdana",14))
 ##
@@ -62,7 +82,7 @@ btn3=Button(window,text="3",bg="#355c58",fg="white",width=5,height=3,command=lam
 btn3.grid(row=3,column=2)
 btn3.config(font=("verdana",14))
 
-btnmul=Button(window,text="x",bg="#355c58",fg="white",width=5,height=3)
+btnmul=Button(window,text="x",bg="#355c58",fg="white",width=5,height=3,command=lambda :get_operator("*"))
 btnmul.grid(row=3,column=3)
 btnmul.config(font=("verdana",14))
 ###
@@ -75,13 +95,12 @@ btnclear=Button(window,text="C",bg="#355c58",fg="white",width=5,height=3,command
 btnclear.grid(row=4,column=1)
 btnclear.config(font=("verdana",14))
 
-btndiv=Button(window,text="/",bg="#355c58",fg="white",width=5,height=3)
+btndiv=Button(window,text="/",bg="#355c58",fg="white",width=5,height=3,command=lambda :get_operator("/"))
 btndiv.grid(row=4,column=2)
 btndiv.config(font=("verdana",14))
 
-btneq=Button(window,text="=",bg="#6f8580",fg="white",width=5,height=3)
+btneq=Button(window,text="=",bg="#6f8580",fg="white",width=5,height=3,command=get_result)
 btneq.grid(row=4,column=3)
 btneq.config(font=("verdana",14))
-
 
 window.mainloop()
